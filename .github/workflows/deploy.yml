@@ -1,0 +1,33 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Navigate to the folder
+            cd /var/www/integers.dev
+            
+            # Pull the latest changes
+            git pull origin master
+            
+            # (Optional) If you have a build step, add it here:
+            # npm install
+            # npm run build
+            
+            # Reload nginx if you changed config files (usually not needed for just HTML/JS)
+            # sudo systemctl reload nginx
