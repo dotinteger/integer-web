@@ -1,99 +1,364 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>INTEGER /// TERMINAL</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTEGER - Indie Game Development</title>
 <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body {
-    background-color: #000000;
-    color: #00ff00;
+    background-color: #0a0a0a;
+    background-image:
+      linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: #e0e0e0;
     font-family: "Courier New", Courier, monospace;
-    padding: 40px;
-    line-height: 1.4;
+    line-height: 1.6;
+    padding: 20px;
   }
-  a {
-    color: #00ff00;
-    text-decoration: underline;
-  }
-  a:hover {
-    background-color: #00ff00;
-    color: #000000;
-    text-decoration: none;
-  }
+
   .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+    background-color: #1a1a1a;
+    border: 3px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
   }
-  .cursor {
+
+  /* Header */
+  header {
+    background: linear-gradient(180deg, #003300 0%, #001a00 100%);
+    border-bottom: 3px solid #00ff00;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .logo {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 15px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+
+  h1 {
+    color: #00ff00;
+    font-size: 2em;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+  }
+
+  .tagline {
+    color: #00cc00;
+    font-size: 0.9em;
+    font-style: italic;
+  }
+
+  /* Navigation */
+  nav {
+    background-color: #000;
+    border-bottom: 2px solid #00ff00;
+    padding: 15px;
+    text-align: center;
+  }
+
+  nav a {
+    color: #00ff00;
+    text-decoration: none;
+    padding: 8px 20px;
+    margin: 0 5px;
+    border: 2px solid #00ff00;
+    background-color: #001a00;
     display: inline-block;
-    width: 10px;
-    height: 18px;
-    background-color: #00ff00;
-    animation: blink 1s infinite;
-    vertical-align: middle;
-  }
-  @keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-  .header-ascii {
-    white-space: pre;
+    transition: all 0.2s;
+    text-transform: uppercase;
     font-weight: bold;
+    font-size: 0.9em;
+  }
+
+  nav a:hover {
+    background-color: #00ff00;
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  }
+
+  /* Main Content */
+  main {
+    padding: 30px;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section-header {
+    background: linear-gradient(90deg, #00ff00 0%, #003300 100%);
+    color: #000;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-left: 5px solid #00cc00;
+  }
+
+  /* Welcome Section */
+  .welcome-box {
+    background-color: #0d0d0d;
+    border: 2px dashed #00ff00;
+    padding: 20px;
     margin-bottom: 20px;
   }
-  .section-title {
-    border-bottom: 1px dashed #00ff00;
-    margin-top: 30px;
+
+  .welcome-box p {
     margin-bottom: 10px;
-    text-transform: uppercase;
+  }
+
+  .status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    margin-right: 5px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+    50% { opacity: 0.5; box-shadow: 0 0 15px rgba(0, 255, 0, 0.8); }
+  }
+
+  /* Project Cards */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .project-card {
+    background-color: #0d0d0d;
+    border: 2px solid #00aa00;
+    padding: 20px;
+    transition: all 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    transform: translateY(-5px);
+  }
+
+  .project-title {
+    color: #00ff00;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .project-status {
+    display: inline-block;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+
+  .status-active {
+    background-color: #003300;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+  }
+
+  .status-pending {
+    background-color: #332200;
+    color: #ffaa00;
+    border: 1px solid #ffaa00;
+  }
+
+  .project-desc {
+    color: #b0b0b0;
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+
+  .progress-bar {
+    background-color: #001a00;
+    border: 1px solid #00ff00;
+    height: 20px;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    background: linear-gradient(90deg, #00ff00, #00aa00);
+    height: 100%;
+    transition: width 0.3s;
+  }
+
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #000;
+    border-top: 3px solid #00ff00;
+    padding: 20px;
+    text-align: center;
+    color: #00aa00;
+    font-size: 0.9em;
+  }
+
+  .footer-links {
+    margin-top: 10px;
+  }
+
+  .footer-links a {
+    color: #00ff00;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+
+  /* Retro Elements */
+  .blink {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    h1 { font-size: 1.5em; }
+    nav a {
+      display: block;
+      margin: 5px 0;
+    }
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="header-ascii">
-   _       _                         
-  (_)_ __ | |_ ___  __ _  ___ _ __   
-  | | '_ \| __/ _ \/ _` |/ _ \ '__|  
-  | | | | | ||  __/ (_| |  __/ |     
-  |_|_| |_|\__\___|\__, |\___|_|     
-                   |___/             
-  </div>
+  <!-- Header -->
+  <header>
+    <img src="images/intlogo.png" alt="INTEGER Logo" class="logo">
+    <h1>INTEGER</h1>
+    <p class="tagline">// Crafting Digital Experiences Since 2025 //</p>
+  </header>
 
-  <p>> SYSTEM READY.</p>
-  <p>> ESTABLISHED CONNECTION TO: CALIFORNIA_SERVER_01</p>
-  
-  <br>
-  
+  <!-- Navigation -->
   <nav>
-    [ <a href="#">PROJECTS</a> ] 
-    [ <a href="#">LOGS</a> ] 
-    [ <a href="#">CONTACT</a> ]
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#logs">Dev Logs</a>
+    <a href="#contact">Contact</a>
   </nav>
 
-  <div class="section-title">>> EXEC: LOAD_PROJECTS.EXE</div>
-  
-  <p>
-  1. <strong>VELOCITY_BIT</strong> [STATUS: ACTIVE]<br>
-     > High-speed mechanics implemented.<br>
-     > Rendering engine optimization: 85% complete.
-  </p>
+  <!-- Main Content -->
+  <main>
+    <!-- Welcome Section -->
+    <section class="section">
+      <div class="welcome-box">
+        <p><span class="status-indicator"></span><strong>SYSTEM STATUS:</strong> ONLINE</p>
+        <p><strong>&gt;&gt;</strong> Welcome to INTEGER, an independent game development studio based in California.</p>
+        <p><strong>&gt;&gt;</strong> We specialize in creating unique, experimental games with a focus on mechanics and atmosphere.</p>
+      </div>
+    </section>
 
-  <p>
-  2. <strong>NULL_POINTER</strong> [STATUS: PENDING]<br>
-     > Narrative structure initialized.<br>
-     > Awaiting sprite assets.
-  </p>
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="section-header">[ Active Projects ]</div>
 
-  <br>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-title">VELOCITY_BIT</div>
+          <span class="project-status status-active">ACTIVE DEVELOPMENT</span>
+          <div class="project-desc">
+            <p><strong>&gt;</strong> High-speed precision platformer</p>
+            <p><strong>&gt;</strong> Physics-based momentum mechanics</p>
+            <p><strong>&gt;</strong> Minimalist aesthetic with particle effects</p>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 85%"></div>
+            <div class="progress-text">85% COMPLETE</div>
+          </div>
+        </div>
 
-  <div class="section-title">>> SYSTEM_MESSAGE</div>
-  <p>
-    Based in California, United States of America.
-    Input command: <span class="cursor"></span>
-  </p>
+        <div class="project-card">
+          <div class="project-title">NULL_POINTER</div>
+          <span class="project-status status-pending">IN PLANNING</span>
+          <div class="project-desc">
+            <p><strong>&gt;</strong> Narrative-driven mystery adventure</p>
+            <p><strong>&gt;</strong> Branching story with multiple endings</p>
+            <p><strong>&gt;</strong> Retro-inspired pixel art style</p>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 25%"></div>
+            <div class="progress-text">25% COMPLETE</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="section-header">[ About INTEGER ]</div>
+      <div class="welcome-box">
+        <p>INTEGER is a small independent game development studio focused on creating innovative and engaging gaming experiences. We believe in:</p>
+        <br>
+        <p><strong>&gt;&gt;</strong> Gameplay-first design philosophy</p>
+        <p><strong>&gt;&gt;</strong> Experimental mechanics and unique concepts</p>
+        <p><strong>&gt;&gt;</strong> Quality over quantity</p>
+        <p><strong>&gt;&gt;</strong> Community feedback and iteration</p>
+        <br>
+        <p><strong>Location:</strong> California, USA</p>
+        <p><strong>Founded:</strong> 2025</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 INTEGER - Independent Game Development</p>
+    <p class="footer-links">
+      <a href="mailto:contact@integer.dev">Email</a> |
+      <a href="#">Twitter</a> |
+      <a href="#">GitHub</a> |
+      <a href="#">Discord</a>
+    </p>
+    <p style="margin-top: 15px; font-size: 0.8em;">
+      <span class="blink">_</span> TERMINAL READY <span class="blink">_</span>
+    </p>
+  </footer>
 </div>
 
 </body>
